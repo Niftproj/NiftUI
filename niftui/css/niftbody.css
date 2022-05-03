@@ -10,3 +10,13 @@
     height: 100vh;
     background-color: #ffffff;
 }
+
+#niftCanvasZERO_ONE *
+{
+    pointer-events: all;
+}
+
+polygon:hover
+{
+    fill: red;
+}

@@ -8,7 +8,7 @@
     "theme_color": "#00B432",
     "icons": [
       {
-        "src": "https://niftproj.github.io/NiftUI/assets/nift-brand.svg",
+        "src": "https://niftproj.github.io/NiftUI/docs/assets/nift-brand.svg",
         "sizes": "90x90",
         "type": "image/svg"
       }
