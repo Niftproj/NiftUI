@@ -22,6 +22,7 @@ class NiftInstance
         this.niftarea.setAttribute("x", 0);
         this.niftarea.setAttribute("y", 0);
         this.parent.appendChild(this.niftarea);
+        this.updateOn = 'mousevent';
     }
 
     initialize = (routes) => {
@@ -30,7 +31,9 @@ class NiftInstance
 
     renderElement = (element = new NiftComponent) => {
         // this.niftarea.appendChild(element.self);
+        element.BeforRendering();
         this.niftarea.appendChild(element.innerRender());
+        element.AfterRendering();
         // this.niftarea.innerHTML = (element.innerRender());
     }
 
