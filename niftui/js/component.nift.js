@@ -63,6 +63,8 @@ class NiftComponent extends NiftNode {
             }
         });
 
+        // Reserve onclick & other user interaction attrs and call custom OnClick and call the function that is given
+
         w += x;
         h += y;
 

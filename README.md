@@ -10,7 +10,7 @@
   <h3 align="center">Nift*UI</h3>
 
   <p align="center">
-    Fully Featured Frontend framework based on Vector Graphics.
+    Fully Featured Frontend framework based on Vector Graphics. <i>(WORK IN PROGRESS.)</i>
     <br />
     <a href="https://niftproj.github.io/NiftUI">Documentation & Demos »</a>
   </p>
