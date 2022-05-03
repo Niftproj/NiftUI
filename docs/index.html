@@ -8,25 +8,25 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.niftproj.github.io/">
+    <meta property="og:url" content="https://www.niftproj.github.io/NiftUI">
     <meta property="og:title" content="Nift*UI - Fully Featured Frontend framework based on Vector Graphics.">
-    <meta property="og:description" content="We work for latest, newest & luxiest and focus on open. we develop hooks for great future.">
-    <meta property="og:image" content="https://www.niftproj.github.io/assets/brand.svg">
+    <meta property="og:description" content="Fully Featured Frontend framework based on Vector Graphics. It's a Nift* Project.">
+    <meta property="og:image" content="https://www.niftproj.github.io/NiftUI/assets/brand.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.niftproj.github.io/">
-    <meta property="twitter:title" content="Nift* - We work for latest, newest & luxiest and focus on open.">
-    <meta property="twitter:description" content="We work for latest, newest & luxiest and focus on open. we develop hooks for great future.">
-    <meta property="twitter:image" content="https://www.niftproj.github.io/assets/brand.svg">
+    <meta property="twitter:url" content="https://www.niftproj.github.io/NiftUI/">
+    <meta property="twitter:title" content="Nift*UI - Fully Featured Frontend framework based on Vector Graphics.">
+    <meta property="twitter:description" content="Fully Featured Frontend framework based on Vector Graphics. It's a Nift* Project.">
+    <meta property="twitter:image" content="https://www.niftproj.github.io/NiftUI/assets/brand.svg">
 
     <!-- Manifests -->
     <link rel="manifest" href="./manifest.json">
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Nift*">
-    <meta name="apple-mobile-web-app-title" content="Nift*">
+    <meta name="application-name" content="Nift*UI">
+    <meta name="apple-mobile-web-app-title" content="Nift*UI">
     <meta name="theme-color" content="#00B432">
     <meta name="msapplication-navbutton-color" content="#00B432">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -37,12 +37,14 @@
     <link rel="apple-touch-icon" type="image/svg" sizes="90x90" href="https://niftproj.github.io/NiftUI/assets/brand.svg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="./css/webgene.css">
-    <link rel="stylesheet" href="./css/nift*.css">
+    <link rel="stylesheet" href="../build/css/niftbody.min.css">
     
 </head>
 
-<body id="niftBody">
+<body id="niftBody" data-niftui-engine="on">
+    <script src="../build/js/niftui.min.js"></script>
+    <script src="./pages/landing.js"></script>
+    <script src="./app.js"></script>
 </body>
 
 </html>

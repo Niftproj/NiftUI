@@ -1,0 +1,17 @@
+{
+    "name": "Nift*UI - Fully Featured Frontend framework based on Vector Graphics.",
+    "short_name": "Nift*UI",
+    "description": "Fully Featured Frontend framework based on Vector Graphics. It's a Nift* Project.",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#00B432",
+    "icons": [
+      {
+        "src": "https://niftproj.github.io/NiftUI/assets/nift-brand.svg",
+        "sizes": "90x90",
+        "type": "image/svg"
+      }
+    ],
+    "background_color": "#00B432"
+  }
