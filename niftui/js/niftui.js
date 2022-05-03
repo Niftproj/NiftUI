@@ -3,7 +3,8 @@ const NIFT_UI_VERSION = '0.1';
 const NIFT_CANVAS_ID = "niftCanvas"+NIFT_UI_SUPPORT_VERSION;
 
 const getCurrentRoute = () => {
-    return '/';
+    // return '/';
+    return window.location.pathname.slice(5);
 }
 
 class NiftInstance
