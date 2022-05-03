@@ -157,6 +157,10 @@ class NiftComponent extends NiftNode
                 if(prop.value == 'true')
                     rawSvg = true;
             }
+            else
+            {
+                this.self.setAttribute(prop.name, prop.value);
+            }
         });
 
         w += x;
