@@ -79,17 +79,30 @@ class NiftProperty
 
 }
 
-class NiftComponent
+class NiftNode
+{
+    constructor()
+    {
+        this.parent = 'default';
+        this.self = false;
+        this.selfDOM = false;
+    }
+};
+
+class NiftComponent extends NiftNode
 {
 
     constructor(parent = 'default')
     {
+        super();
+
         if(parent == 'default')
             parent = document.getElementById("niftBody");
 
         this.parent = parent;
         this.self = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
         this.props = [];
+        this.childs = [];
         this.selfDOM = false;
     }
 
@@ -112,6 +125,8 @@ class NiftComponent
                 this.props.push(new NiftProperty(element.nodeName, element.nodeValue));
             }
         }
+        
+        // console.log(this.selfDOM)
 
         // Set Points
         let x = 0, y = 0, w = x+0, h = y+0;
