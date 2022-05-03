@@ -115,6 +115,7 @@ class NiftComponent
 
         // Set Points
         let x = 0, y = 0, w = x+0, h = y+0;
+        let rawSvg = false;
         this.props.map(prop => {
             if(prop.name == 'x')
             {
@@ -135,6 +136,11 @@ class NiftComponent
             else if(prop.name == 'background')
             {
                 this.self.setAttribute("fill", prop.value);
+            }
+            else if(prop.name == 'niftskip')
+            {
+                if(prop.value == 'true')
+                    rawSvg = true;
             }
         });
 
@@ -166,6 +172,10 @@ class NiftComponent
 
         this.self.setAttribute("points", pointsString);
 
+        if(rawSvg == true)
+        {
+            return this.selfDOM;
+        }
         return this.self;
     }
 
