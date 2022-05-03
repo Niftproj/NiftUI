@@ -35,6 +35,8 @@ class NiftInstance
         element.BeforRendering();
         this.niftarea.appendChild(element.innerRender());
         element.AfterRendering();
+        // Update ELement after calling above function
+        
         // this.niftarea.innerHTML = (element.innerRender());
     }
 

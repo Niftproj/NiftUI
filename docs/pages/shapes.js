@@ -12,6 +12,10 @@ class ShapesPage extends NiftComponent
         this.navigationColor = "#000";
     }
 
+    AfterRendering = () => {
+        this.navigationColor = "#ccc";
+    }
+
     render = () => {
         return (`
         
