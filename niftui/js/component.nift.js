@@ -1,16 +1,18 @@
 class NiftComponent extends NiftNode {
 
-    constructor(parent = 'default') {
+    constructor(props = [], parent = 'default') {
         super();
 
         if (parent == 'default')
             parent = document.getElementById("niftBody");
 
         this.parent = parent;
-        this.self = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-        this.props = [];
-        this.childs = [];
+        this.selfBackdrop = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        this.backdropProps = [];
+        this.self = false;
         this.selfDOM = false;
+        this.props = props;
+        this.childs = [];
     }
 
     // When It's Render chance comes
@@ -23,8 +25,13 @@ class NiftComponent extends NiftNode {
 
     innerRender = () => {
 
-        let dom = new DOMParser();
-        this.selfDOM = dom.parseFromString(this.render(), "text/html").all[3];
+        this.selfDOM = GetDOMObjectFromString(this.render());
+
+        let componentName = Component[this.selfDOM.tagName];
+        if(componentName == undefined)
+        {
+            return NiftErrorHandler(`Undefined tag ${this.selfDOM.tagName} called.`);
+        }
 
         for (const key in this.selfDOM.attributes) {
             if (Object.hasOwnProperty.call(this.selfDOM.attributes, key)) {
@@ -32,6 +39,9 @@ class NiftComponent extends NiftNode {
                 this.props.push(new NiftProperty(element.nodeName, element.nodeValue));
             }
         }
+
+        let me = new (eval(componentName))(this.props);
+        console.log(me)
 
         // console.log(this.selfDOM)
 
@@ -97,6 +107,21 @@ class NiftComponent extends NiftNode {
             return this.selfDOM;
         }
         return this.self;
+    }
+
+};
+
+class NiftBlock extends NiftComponent
+{
+
+    constructor(props = [])
+    {
+        super(props);
+        super.self = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    }
+
+    render = () => {
+        
     }
 
 };

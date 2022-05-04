@@ -31,6 +31,7 @@ class gFooter extends NiftComponent
     }
 
     render = () => {
+        
         return (`
         
             <NiftParent x="0" y="100" w="${window.outerWidth}" h="160" background="${this.background}">

@@ -20,3 +20,49 @@ polygon:hover
 {
     fill: red;
 }
+
+#niftErrorBody
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(12px);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#niftErrorBody > #niftErrorLogo
+{
+    width: 160px;
+    height: auto;
+    margin: 12px;
+}
+
+#niftErrorBody > #niftErrorText
+{
+    font-size: 18px;
+    color: #00B432;
+    font-weight: 600;
+    font-family: sans-serif;
+    margin: 12px;
+}
+
+#niftErrorBody::after
+{
+    content: 'rendering is not possible until this is fixed.';
+    display: block;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 30px;
+    border-radius: 45px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: sans-serif;
+}
