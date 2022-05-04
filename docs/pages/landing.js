@@ -28,7 +28,12 @@ class LandingPage extends NiftComponent
         
         // `);
         return (`
-            <NiftBlock x="100" y="200"></NiftBlock>
+            <NiftBlock niftName="iamparent" x="100" y="200">
+                <!--<Child>
+                    <Subchild></Subchild>
+                </Child>-->
+                <NiftBlock niftName="iamchild" x="10" y="20"></NiftBlock>
+            </NiftBlock>
         `);
     }
 

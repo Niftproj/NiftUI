@@ -14,6 +14,9 @@ const Component = {
   "NIFTBLOCK": "NiftBlock"
 }
 
+function GetDictionaryName(raw) {
+  return Component[raw];
+}
 
 const DOMEngine = new DOMParser();
 
