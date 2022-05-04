@@ -41,11 +41,18 @@
     
 </head>
 
-<body id="niftBody" data-niftui-engine="on">
+<body id="outerBody" data-niftui-engine="on">
+    
+    <div id="niftBody"></div>
+
     <script src="../build/js/niftui.all.min.js"></script>
-    <script src="./pages/landing.js"></script>
     <script src="./pages/shapes.js"></script>
-    <script src="./app.js"></script>
+
+    <script>
+        const niftEngine = new NiftInstance();
+        niftEngine.renderElement(new ShapesPage("Shapes"));
+    </script>
+
 </body>
 
 </html>
