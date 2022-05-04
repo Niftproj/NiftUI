@@ -21,7 +21,18 @@ class NiftInstance {
 
     renderElement = (element = new NiftComponent) => {
 
-        element.innerRender();
+        element.BeforRendering();
+
+        let svgNode = element.innerRender();
+        
+        if(svgNode.selfOut !== false)
+            this.niftarea.appendChild(svgNode.selfOut);
+        if(svgNode.selfOutBackdrop !== false)
+            this.niftarea.appendChild(svgNode.selfOutBackdrop);
+        if(svgNode.selfOutChilds !== false)
+            this.niftarea.appendChild(svgNode.selfOutChilds); 
+
+        element.AfterRendering();
 
     }
     

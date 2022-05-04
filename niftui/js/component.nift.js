@@ -12,6 +12,7 @@ class NiftComponent extends NiftNode {
         this.backdropProps = [];
         
         this.self = false;
+        this.selfOutput = false;
         this.selfDOM = false;
         this.props = props;
 
@@ -77,15 +78,18 @@ class NiftComponent extends NiftNode {
 
         this.self = new (eval(componentName))(this.props);
         this.self.render();
-        console.log(this.self)
-        console.log(this.selfDOM)
-
-        // DO CHILDS
+        
+        // Currently: level 1 is only supported yet.
         this.getChilds(this.selfDOM.children);
 
-        console.log(this.childs)
+        console.log(this)
 
-        return false;
+        let returnable = new NiftNode();
+        returnable.selfOut = this.self.selfOutput;
+        returnable.selfOutBackdrop = this.selfBackdrop;
+        returnable.selfOutChilds = false;
+
+        return returnable;
     }
 
 };
@@ -96,19 +100,33 @@ class NiftBlock extends NiftComponent
     constructor(props = [])
     {
         super(props);
-        this.self = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        this.yet = false;
+        this.create();
     }
 
     update = () => {
         
         this.props.map(prop => {
-            this.self.setAttribute(prop.name, prop.value);
+            this.selfOutput.setAttribute(prop.name, prop.value);
         });
 
     }
 
+    create = () => {
+        this.selfOutput = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    }
+
     render = () => {
-        this.update();
+
+        if(this.yet)
+        {
+            this.update();
+        }
+        else
+        {
+            this.create();
+            this.yet = true;
+        }
     }
 
 };

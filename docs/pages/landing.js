@@ -12,6 +12,10 @@ class LandingPage extends NiftComponent
         this.navigationColor = "#00B432";
     }
 
+    AfterRendering = () => {
+        this.selfBackdrop.setAttribute("custom", "custom");
+    }
+
     render = () => {
 
         // TESTING
@@ -33,6 +37,7 @@ class LandingPage extends NiftComponent
                     <Subchild></Subchild>
                 </Child>-->
                 <NiftBlock niftName="iamchild" x="10" y="20"></NiftBlock>
+                <NiftBlock niftName="iamchild2" x="102" y="210"></NiftBlock>
             </NiftBlock>
         `);
     }
