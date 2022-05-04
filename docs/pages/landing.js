@@ -13,7 +13,9 @@ class LandingPage extends NiftComponent
     }
 
     AfterRendering = () => {
-        this.selfBackdrop.setAttribute("custom", "custom");
+        // this.selfOut.setAttribute("msg", "this is after render");
+        this.setProperty("hello", "yes!");
+        console.log(this)
     }
 
     render = () => {

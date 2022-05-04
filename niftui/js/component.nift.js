@@ -56,6 +56,10 @@ class NiftComponent extends NiftNode {
 
     }
 
+    setProperty = (name, value) => {
+        this.props.push(new NiftProperty(name, value));
+    }
+
     innerRender = () => {
 
         // Parse the Doc
