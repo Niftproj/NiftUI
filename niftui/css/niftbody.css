@@ -40,9 +40,9 @@ polygon:hover
 
 #niftErrorBody > #niftErrorLogo
 {
-    width: 160px;
+    width: 140px;
     height: auto;
-    margin: 12px;
+    margin-bottom: 12px;
 }
 
 #niftErrorBody > #niftErrorText
@@ -51,14 +51,14 @@ polygon:hover
     color: #00B432;
     font-weight: 600;
     font-family: sans-serif;
-    margin: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 #niftErrorBody::after
 {
     content: 'rendering is not possible until this is fixed.';
     display: block;
-    /* background-color: rgba(255, 255, 255, 0.1); */
     background-color: rgba(0, 180, 51, 0.6);
     padding: 10px 30px;
     border-radius: 45px;

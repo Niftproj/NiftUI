@@ -20,25 +20,9 @@ class NiftInstance {
     }
 
     renderElement = (element = new NiftComponent) => {
-        // this.niftarea.appendChild(element.self);
-        element.BeforRendering();
-        this.niftarea.appendChild(element.innerRender());
-        element.AfterRendering();
-        // Update ELement after calling above function
 
-        // this.niftarea.innerHTML = (element.innerRender());
-    }
-
-    compile = () => {
-
-        this.routes.map(route => {
-            if (route.getPath() == getCurrentRoute()) {
-                this.renderElement(route.setupAndRender());
-                return;
-            }
-        })
+        element.innerRender();
 
     }
-
     
 }

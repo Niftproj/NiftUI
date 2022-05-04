@@ -42,4 +42,5 @@ function NiftErrorHandler(errorText) {
 
     console.error(errorText);
 
+    return false;
 }
