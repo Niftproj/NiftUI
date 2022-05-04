@@ -33,8 +33,6 @@ class NiftInstance {
             this.niftarea.appendChild(svgNode.selfOutChilds); 
 
         element.AfterRendering();
-        element.render();
-        console.log(element)
 
     }
     

@@ -27,8 +27,6 @@ class NiftComponent extends NiftNode {
     // When Rendered
     AfterRendering = () => { }
 
-    render = () => { }
-
     getChilds = (domChilderns) => {
 
         for (const key in domChilderns) {
@@ -58,6 +56,20 @@ class NiftComponent extends NiftNode {
 
     setProperty = (name, value) => {
         this.props.push(new NiftProperty(name, value));
+        this.updateInners();
+    }
+
+    mapDOMAttributesToNiftProps = (domAttrs) => {
+        let props = [];
+        
+        for (const key in domAttrs) {
+            if (Object.hasOwnProperty.call(domAttrs, key)) {
+                const node = domAttrs.attributes[key];
+                props.push(new NiftProperty(node.nodeName, node.nodeValue));
+            }
+        }
+
+        return props;
     }
 
     innerRender = () => {
@@ -86,14 +98,16 @@ class NiftComponent extends NiftNode {
         // Currently: level 1 is only supported yet.
         this.getChilds(this.selfDOM.children);
 
-        console.log(this)
-
         let returnable = new NiftNode();
         returnable.selfOut = this.self.selfOutput;
         returnable.selfOutBackdrop = this.selfBackdrop;
         returnable.selfOutChilds = false;
 
         return returnable;
+    }
+
+    updateInners = () => {
+        this.self.render();
     }
 
 };
@@ -109,7 +123,6 @@ class NiftBlock extends NiftComponent
     }
 
     update = () => {
-        
         this.props.map(prop => {
             this.selfOutput.setAttribute(prop.name, prop.value);
         });
@@ -129,6 +142,7 @@ class NiftBlock extends NiftComponent
         else
         {
             this.create();
+            this.update();
             this.yet = true;
         }
     }

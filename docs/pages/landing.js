@@ -13,9 +13,8 @@ class LandingPage extends NiftComponent
     }
 
     AfterRendering = () => {
-        // this.selfOut.setAttribute("msg", "this is after render");
         this.setProperty("hello", "yes!");
-        console.log(this)
+        this.setProperty("after", "it is after render a time!");
     }
 
     render = () => {
