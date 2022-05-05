@@ -26,6 +26,11 @@
 * Easy
 * Custom Components
 
+<!-- GETTING STARTED -->
+## Getting Started
+* For Server, see ```docs/easy.html``` & ```docs/pages/easy.js```, it is based on module. (Actually, due to CORS security policy, module objs can only run into server mode.)
+* For Serverless, see ```docs/index.html``` or ```docs/shapes.html``` & ```docs/pages/landing.js``` or ```docs/pages/shapes.js```, it is normal as standard js, It can also used in Server mode.
+
 <!-- LICENSE -->
 ## License
 
