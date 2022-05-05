@@ -1,3 +1,10 @@
+import {NiftAsModule,
+    NiftNode,
+    NiftRoute,
+    NiftProperty,
+    NiftComponent,
+    NiftInstance} from '../../build/js/niftui.all.min.js'
+
 class EasyPage extends NiftComponent
 {
     constructor()
@@ -14,3 +21,10 @@ class EasyPage extends NiftComponent
         `);
     }
 }
+
+function CompileEasyPage() {
+    const niftEngine = new NiftInstance();
+    niftEngine.renderElement(new EasyPage("Undef"));
+}
+
+export {CompileEasyPage, EasyPage};

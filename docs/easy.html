@@ -46,12 +46,13 @@
 
     <div id="niftBody"></div>
 
-    <script src="../build/js/niftui.all.min.js"></script>
-    <script src="./pages/easy.js"></script>
-
-    <script>
+    <script type="module">
+        import {EasyPage} from './pages/easy.js';
+        import {NiftInstance} from '../build/js/niftui.all.min.js';
         const niftEngine = new NiftInstance();
         niftEngine.renderElement(new EasyPage("Undef"));
+        // import {CompileEasyPage} from './pages/easy.js';
+        // CompileEasyPage();
     </script>
 
 </body>
