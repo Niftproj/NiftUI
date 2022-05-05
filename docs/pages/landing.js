@@ -46,9 +46,22 @@ class LandingPage extends NiftComponent
         //     <NiftBlock x="80" y="160" width="100" height="300"></NiftBlock>
         
         // `);
+        
+        /// TODO: fix height is inputed as end point
+        
         return (`
             <NiftBlock niftName="iamparent" x="0" y="0" width="${window.outerWidth}" height="${window.outerHeight}" fill="${this.navigationColor}">
                 <NiftBlock x="0" y="0" width="${window.outerWidth}" height="60" fill="#ffffff"></NiftBlock>
+                <NiftBlock x="0" y="60" width="${window.outerWidth}" height="120" fill="rgba(255,255,255,0.8)"></NiftBlock>
+                <NiftBlock x="0" y="120" width="${window.outerWidth}" height="180" fill="rgba(255,255,255,0.6)"></NiftBlock>
+                <NiftBlock x="0" y="180" width="${window.outerWidth}" height="240" fill="rgba(255,255,255,0.4)"></NiftBlock>
+                <NiftBlock x="0" y="240" width="${window.outerWidth}" height="300" fill="rgba(255,255,255,0.2)"></NiftBlock>
+                <NiftBlock x="0" y="300" width="${window.outerWidth}" height="360" fill="rgba(255,255,255,0)"></NiftBlock>
+                <NiftBlock x="0" y="360" width="${window.outerWidth}" height="420" fill="rgba(0,0,0,0.2)"></NiftBlock>
+                <NiftBlock x="0" y="420" width="${window.outerWidth}" height="480" fill="rgba(0,0,0,0.4)"></NiftBlock>
+                <NiftBlock x="0" y="480" width="${window.outerWidth}" height="540" fill="rgba(0,0,0,0.6)"></NiftBlock>
+                <NiftBlock x="0" y="540" width="${window.outerWidth}" height="600" fill="rgba(0,0,0,0.8)"></NiftBlock>
+                <NiftBlock x="0" y="600" width="${window.outerWidth}" height="660" fill="rgba(0,0,0,1)"></NiftBlock>
             </NiftBlock>
         `);
     }
