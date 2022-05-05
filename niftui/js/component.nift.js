@@ -20,6 +20,7 @@ class NiftComponent extends NiftNode {
         this.renderedProps = [];
 
         this.childs = [];
+        this.ready = false;
 
         this.error = false;
     }
@@ -57,6 +58,7 @@ class NiftComponent extends NiftNode {
                 }
 
                 this.childs.push(new (eval(childComponentName))(childProps)); 
+                this.childs[this.childs.length-1].ready = true;
             }
         }
 
@@ -107,43 +109,67 @@ class NiftComponent extends NiftNode {
 
     innerRender = () => {
 
-        // Parse the Doc
-        this.selfDOM = GetDOMObjectFromString(this.render());
-
-        // Get Component Name from Dictionary
-        let componentName = GetDictionaryName(this.selfDOM.tagName);
-        if(componentName == undefined)
+        if(!this.ready)
         {
-            return NiftErrorHandler(`Undefined tag ${this.selfDOM.tagName} called.`);
-        }
+            // Parse the Doc
+            this.selfDOM = GetDOMObjectFromString(this.render());
 
-        // Map DOM attributes to Nift Props.
-        for (const key in this.selfDOM.attributes) {
-            if (Object.hasOwnProperty.call(this.selfDOM.attributes, key)) {
-                const element = this.selfDOM.attributes[key];
-                this.props.push(new NiftProperty(element.nodeName, element.nodeValue));
+            // Get Component Name from Dictionary
+            let componentName = GetDictionaryName(this.selfDOM.tagName);
+            if(componentName == undefined)
+            {
+                return NiftErrorHandler(`Undefined tag ${this.selfDOM.tagName} called.`);
             }
+
+            // Map DOM attributes to Nift Props.
+            for (const key in this.selfDOM.attributes) {
+                if (Object.hasOwnProperty.call(this.selfDOM.attributes, key)) {
+                    const element = this.selfDOM.attributes[key];
+                    this.props.push(new NiftProperty(element.nodeName, element.nodeValue));
+                }
+            }
+
+            this.self = new (eval(componentName))(this.props);
+            this.self.render();
+            
+            // Currently: level 1 is only supported yet.
+            this.getChilds(this.selfDOM.children);
         }
 
-        this.self = new (eval(componentName))(this.props);
-        this.self.render();
-        
-        // Currently: level 1 is only supported yet.
-        this.getChilds(this.selfDOM.children);
+        let renderedChilds = this.childs.map(child => {
+            child.render();
+            console.log(child)
+            return child.innerRender();
+        });
+        console.log(renderedChilds)
+
+        // this.ready is id of parent
 
         this.stylizeBackdrop();
 
         let returnable = new NiftNode();
-        returnable.selfOut = this.self.selfOutput;
+        if(!this.ready)
+            returnable.selfOut = this.self.selfOutput;
+        else
+            returnable.selfOut = this.selfOutput;
+        
         returnable.selfOutBackdrop = this.selfBackdrop;
-        returnable.selfOutChilds = false;
+        returnable.selfOutChilds = renderedChilds;
 
         return returnable;
     }
 
     updateInners = () => {
-        this.self.render();
-        this.updateBackdropAreaCapture(this.self.rectArea.pointsString);
+        if(!this.ready)
+        {
+            this.self.render();
+            this.updateBackdropAreaCapture(this.self.rectArea.pointsString);
+        }
+        else
+        {
+            this.render();
+            this.updateBackdropAreaCapture(this.rectArea.pointsString);
+        }
     }
 
 };

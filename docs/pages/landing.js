@@ -13,8 +13,6 @@ class LandingPage extends NiftComponent
     }
 
     AfterRendering = () => {
-        // this.setProperty("x", "100");
-        // this.setProperty("w", "4000");
         this.setProperty("hello", "yes!");
         this.setProperty("after", "it is after render a time!");
         this.setProperty("fill", "royalblue");
@@ -25,14 +23,12 @@ class LandingPage extends NiftComponent
         console.log(this.getProperty("hello"));
         this.removeProperty("hello");
         console.log(this.getProperty("hello"));
+
+        this.childs[0].setProperty("fill", "green");
+        this.childs[1].setProperty("fill", "blue");
     }
 
     render = () => {
-
-        // TESTING
-        // let tag = "NiftBlock";
-        // let rendered = new (eval(tag))(0,2,4,8);
-        // console.log(rendered);
 
         // return (`
         
@@ -47,9 +43,10 @@ class LandingPage extends NiftComponent
                 <!--<Child>
                     <Subchild></Subchild>
                 </Child>-->
-                <NiftBlock niftName="iamchild" x="10" y="20"></NiftBlock>
-                <NiftBlock niftName="iamchild2" x="102" y="210"></NiftBlock>
+                <NiftBlock niftName="iamchild" x="10" y="20" width="300" height="40"></NiftBlock>
+                <NiftBlock niftName="iamchild2" x="102" y="210" width="600" height="10"></NiftBlock>
             </NiftBlock>
+            <NiftBlock x="80" y="160" width="100" height="300"></NiftBlock>
         `);
     }
 
