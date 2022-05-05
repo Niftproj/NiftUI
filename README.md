@@ -17,6 +17,15 @@
 
 </div>
 
+<!-- FEATURES LIST -->
+## Features
+* Lightweight
+* Vanilla JS
+* Supports both Serverless & on Server
+* Client Side
+* Easy
+* Custom Components
+
 <!-- LICENSE -->
 ## License
 
