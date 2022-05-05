@@ -1,3 +1,7 @@
+function OO() {
+    console.log("hhh")
+}
+
 class LandingPage extends NiftComponent
 {
 
@@ -15,7 +19,7 @@ class LandingPage extends NiftComponent
     AfterRendering = () => {
         // this.setProperty("hello", "yes!");
         // this.setProperty("after", "it is after render a time!");
-        // this.setProperty("fill", "royalblue");
+        this.setProperty("fill", "royalblue");
         // this.removeProperty("hello");
         // this.removeProperty("after");
         // console.log(this.getProperty("fill"));
@@ -26,6 +30,10 @@ class LandingPage extends NiftComponent
 
         // this.childs[0].setProperty("fill", "green");
         // this.childs[1].setProperty("fill", "blue");
+    }
+
+    listenMe = () => {
+        console.log("Icalled")
     }
 
     render = () => {
@@ -48,10 +56,10 @@ class LandingPage extends NiftComponent
         // `);
         
         /// TODO: fix height is inputed as end point
-        
+        /// TODO: fix click is not working because of backfall element is above on it
         return (`
             <NiftBlock niftName="iamparent" x="0" y="0" width="${window.outerWidth}" height="${window.outerHeight}" fill="${this.navigationColor}">
-                <NiftBlock x="0" y="0" width="${window.outerWidth}" height="60" fill="#ffffff"></NiftBlock>
+                <NiftBlock onclick="OO()" x="0" y="0" width="${window.outerWidth}" height="60" fill="#ffffff"></NiftBlock>
                 <NiftBlock x="0" y="60" width="${window.outerWidth}" height="120" fill="rgba(255,255,255,0.8)"></NiftBlock>
                 <NiftBlock x="0" y="120" width="${window.outerWidth}" height="180" fill="rgba(255,255,255,0.6)"></NiftBlock>
                 <NiftBlock x="0" y="180" width="${window.outerWidth}" height="240" fill="rgba(255,255,255,0.4)"></NiftBlock>
