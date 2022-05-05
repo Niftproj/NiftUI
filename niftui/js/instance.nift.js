@@ -27,6 +27,13 @@ class NiftInstance {
 
         let svgNode = element.innerRender();
         
+
+
+        if(svgNode.selfOut !== false)
+            this.niftarea.appendChild(svgNode.selfOut);
+        if(svgNode.selfOutBackdrop !== false)
+            this.niftarea.appendChild(svgNode.selfOutBackdrop);
+
         if(svgNode.selfOutChilds !== false)
         {
             svgNode.selfOutChilds.map(child => {
@@ -40,11 +47,7 @@ class NiftInstance {
             });
         }
 
-        if(svgNode.selfOut !== false)
-            this.niftarea.appendChild(svgNode.selfOut);
-        if(svgNode.selfOutBackdrop !== false)
-            this.niftarea.appendChild(svgNode.selfOutBackdrop);
-
+        element.updateInners();
         element.AfterRendering();
 
     }

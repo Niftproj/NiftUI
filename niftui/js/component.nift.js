@@ -138,12 +138,12 @@ class NiftComponent extends NiftNode {
 
         let renderedChilds = this.childs.map(child => {
             child.render();
-            console.log(child)
             child.BeforRendering();
             child.AfterRendering();
-            return child.innerRender();
+            let res = child.innerRender();
+            child.updateInners();
+            return res;
         });
-        console.log(renderedChilds)
 
         // this.ready is id of parent
 
