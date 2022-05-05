@@ -16,6 +16,7 @@ class EasyPage extends NiftComponent
         return (`
         
         <NiftParent onclick="Listener(this)" niftSkip="false" x="0" y="0" w="${window.outerWidth}" h="60" background="blue">
+            <Child></Child>
         </NiftParent>
         
         `);

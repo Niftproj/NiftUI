@@ -30,7 +30,7 @@ class NiftInstance {
         if(svgNode.selfOutChilds !== false)
         {
             svgNode.selfOutChilds.map(child => {
-                // for tree view rendering (parent-child relationship)
+                // for tree view rendering (parent-child relationship) for this -> parent should be a svg group or svg tag with its x, y range.
                 // svgNode.selfOut.appendChild(child.selfOut);
                 // svgNode.selfOut.appendChild(child.selfOutBackdrop);
 
