@@ -13,8 +13,12 @@ class LandingPage extends NiftComponent
     }
 
     AfterRendering = () => {
+        this.setProperty("x", "400");
         this.setProperty("hello", "yes!");
         this.setProperty("after", "it is after render a time!");
+        this.setProperty("fill", "royalblue");
+        this.removeProperty("hello");
+        this.removeProperty("after");
     }
 
     render = () => {

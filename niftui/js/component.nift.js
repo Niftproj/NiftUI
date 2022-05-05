@@ -9,7 +9,9 @@ class NiftComponent extends NiftNode {
         this.parent = parent;
         
         this.selfBackdrop = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        
         this.backdropProps = [];
+        this.selfBackdrop.setAttribute("niftType", "backfall");
         
         this.self = false;
         this.selfOutput = false;
@@ -26,6 +28,11 @@ class NiftComponent extends NiftNode {
 
     // When Rendered
     AfterRendering = () => { }
+
+    // Stylize Backdrop
+    stylizeBackdrop = () => {
+        this.selfBackdrop.setAttribute("fill", "transparent");
+    }
 
     getChilds = (domChilderns) => {
 
@@ -59,6 +66,21 @@ class NiftComponent extends NiftNode {
         this.updateInners();
     }
 
+    removeProperty = (name) => {
+        let index = -1;
+        let i = 0;
+        this.props.map(prop => {
+            if(prop.name == name && index == -1)
+            {
+                prop.toRemove = true;
+                index = i;
+            }
+            // i++;
+        })
+        // this.props.splice(index,1);
+        this.updateInners();
+    }
+
     mapDOMAttributesToNiftProps = (domAttrs) => {
         let props = [];
         
@@ -70,6 +92,10 @@ class NiftComponent extends NiftNode {
         }
 
         return props;
+    }
+
+    updateBackdropAreaCapture = (points) => {
+        this.selfBackdrop.setAttribute("points", points);
     }
 
     innerRender = () => {
@@ -98,6 +124,8 @@ class NiftComponent extends NiftNode {
         // Currently: level 1 is only supported yet.
         this.getChilds(this.selfDOM.children);
 
+        this.stylizeBackdrop();
+
         let returnable = new NiftNode();
         returnable.selfOut = this.self.selfOutput;
         returnable.selfOutBackdrop = this.selfBackdrop;
@@ -108,9 +136,71 @@ class NiftComponent extends NiftNode {
 
     updateInners = () => {
         this.self.render();
+        this.updateBackdropAreaCapture(this.self.rectArea.pointsString);
     }
 
 };
+
+class NiftRect
+{
+    constructor(x=0, y=0, w=0, h=0)
+    {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.pointsString = '';
+        this.points = [
+            {
+                x: x,
+                y: y
+            },
+            {
+                x: w,
+                y: y
+            },
+            {
+                x: w,
+                y: h
+            },
+            {
+                x: x,
+                y: h
+            }
+        ];
+    }
+
+    buildPolygonPoints = () => {
+        this.points = [
+            {
+                x: this.x,
+                y: this.y
+            },
+            {
+                x: this.w,
+                y: this.y
+            },
+            {
+                x: this.w,
+                y: this.h
+            },
+            {
+                x: this.x,
+                y: this.h
+            }
+        ];
+
+        return this.points;
+    }
+
+    getPointsString = () => {
+        this.pointsString = this.points.reduce((str, p) => {
+            return str + parseInt(p.x) + ',' + parseInt(p.y) + ' ';
+        }, '');
+
+        return this.pointsString;
+    }
+}
 
 class NiftBlock extends NiftComponent
 {
@@ -119,14 +209,58 @@ class NiftBlock extends NiftComponent
     {
         super(props);
         this.yet = false;
+        this.rectArea = new NiftRect;
         this.create();
     }
 
-    update = () => {
-        this.props.map(prop => {
-            this.selfOutput.setAttribute(prop.name, prop.value);
-        });
+    propertyWorker = (prop = new NiftProperty) => {
 
+        let newName = prop.name;
+        let newValue = prop.value;
+
+        switch (prop.name) {
+            case 'x':
+                this.rectArea.x = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'y':
+                this.rectArea.y = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'width':
+                this.rectArea.w = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'height':
+                this.rectArea.h = parseInt(prop.value);
+                newName = 'points';
+                break;
+            default:
+                break;
+        }
+
+        if(newName == 'points')
+        {
+            this.rectArea.buildPolygonPoints();
+            newValue = this.rectArea.getPointsString();
+        }
+
+        return new NiftProperty(newName, newValue, prop.toRemove);
+    }
+
+    update = () => {
+        let i = 0;
+        this.props.map(prop => {
+            let newProp = this.propertyWorker(prop);
+            if(!newProp.toRemove)
+                this.selfOutput.setAttribute(newProp.name, newProp.value);
+            else
+            {
+                this.selfOutput.removeAttribute(newProp.name);
+                this.props.splice(i, 1);
+            }
+            i++;
+        });
     }
 
     create = () => {
