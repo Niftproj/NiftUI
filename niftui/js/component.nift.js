@@ -17,6 +17,7 @@ class NiftComponent extends NiftNode {
         this.selfOutput = false;
         this.selfDOM = false;
         this.props = props;
+        this.renderedProps = [];
 
         this.childs = [];
 
@@ -66,18 +67,24 @@ class NiftComponent extends NiftNode {
         this.updateInners();
     }
 
+    getProperty = (name) => {
+        let res = undefined;
+        this.self.renderedProps.map(prop => {
+            if(prop.name == name && prop.toRemove == false)     // toRemove(deleted) Barrier
+                res = prop.value;
+        });
+        return res;
+    }
+
     removeProperty = (name) => {
         let index = -1;
-        let i = 0;
         this.props.map(prop => {
             if(prop.name == name && index == -1)
             {
                 prop.toRemove = true;
-                index = i;
+                index = 0;
             }
-            // i++;
-        })
-        // this.props.splice(index,1);
+        });
         this.updateInners();
     }
 
@@ -245,7 +252,27 @@ class NiftBlock extends NiftComponent
             newValue = this.rectArea.getPointsString();
         }
 
-        return new NiftProperty(newName, newValue, prop.toRemove);
+        let index = -1;
+        let i = 0;
+        this.renderedProps.map(pr => {
+            if(pr.name == newName)
+            {
+                pr.value = newValue;
+                pr.toRemove = prop.toRemove;
+                index = i;
+            }
+            i++;
+        });
+
+        if(index == -1)
+        {
+            this.renderedProps.push(new NiftProperty(newName, newValue, prop.toRemove));
+            return this.renderedProps[this.renderedProps.length-1];
+        }
+        else
+        {
+            return this.renderedProps[index];
+        }
     }
 
     update = () => {
