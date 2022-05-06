@@ -48,11 +48,17 @@
     <div id="niftBody"></div>
 
     <script src="../build/js/niftui.sl.all.min.js"></script>
-    <script src="./pages/landing.js"></script>
 
-    <script>
-        const niftEngine = new NiftInstance();
-        niftEngine.renderElement(new LandingPage("Undef"));
+    <script type="module">
+        
+        // Nift Engine
+        import {NiftInstance} from "../build/js/niftui.all.min.js";
+        // Landing Page Component
+        import { FtLandingPage } from "./pages/index.mjs";
+
+        const engineService = new NiftInstance();
+        engineService.renderElement(new FtLandingPage());
+
     </script>
 
 </body>
