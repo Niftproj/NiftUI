@@ -1,3 +1,4 @@
 cat ./niftui/js/ui.nift.js ./niftui/js/svg.nift.js ./niftui/js/utils.nift.js ./niftui/js/instance.nift.js ./niftui/js/route.nift.js ./niftui/js/property.nift.js ./niftui/js/node.nift.js ./niftui/js/component.nift.js ./niftui/js/module.nift.js | uglifyjs -m -c -o ./build/js/niftui.all.min.js
 cat ./niftui/js/ui.nift.js ./niftui/js/svg.nift.js ./niftui/js/utils.nift.js ./niftui/js/instance.nift.js ./niftui/js/route.nift.js ./niftui/js/property.nift.js ./niftui/js/node.nift.js ./niftui/js/component.nift.js | uglifyjs -m -c -o ./build/js/niftui.sl.all.min.js
+uglifycss ./niftui/css/niftbody.css > ./build/css/niftui.all.min.css
 # sl -> serverlessMode
