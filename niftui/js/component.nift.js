@@ -101,6 +101,17 @@ class NiftComponent extends NiftNode {
         this.updateInners();
     }
 
+    iteratePropertyValue = (val) => {
+        // Scan for IT IS NOT NIFT VARIABLE
+
+        if(val == '%VIEWY%')
+        {
+            val = toString(window.outerHeight);
+        }
+
+        return val;
+    }
+
     mapDOMAttributesToNiftProps = (domAttrs) => {
         let props = [];
         
@@ -264,6 +275,8 @@ class NiftText extends NiftComponent
         let newName = prop.name;
         let newValue = prop.value;
 
+        // console.log("iterated from: "+prop.value + ", to: "+this.iteratePropertyValue(prop.value));
+
         switch (prop.name) {
             case 'x':
                 this.rectArea.x = parseInt(prop.value);
@@ -399,6 +412,8 @@ class NiftBlock extends NiftComponent
 
         let newName = prop.name;
         let newValue = prop.value;
+
+        // console.log("iterated from: "+prop.value + ", to: "+this.iteratePropertyValue(prop.value));
 
         switch (prop.name) {
             case 'x':
