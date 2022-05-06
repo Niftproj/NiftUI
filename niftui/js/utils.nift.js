@@ -13,6 +13,7 @@ const getCurrentRoute = () => {
 const Component = {
   "NIFTBLOCK": "NiftBlock",
   "NIFTTEXT": "NiftText",
+  "NIFTIMAGE": "NiftImage",
   "CUSTOMCOMPONENT": "CustomComponent"
 }
 

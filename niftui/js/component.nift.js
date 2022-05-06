@@ -397,6 +397,124 @@ class NiftText extends NiftComponent
     }
 }
 
+class NiftImage extends NiftComponent
+{
+    constructor(props = [])
+    {
+        super(props);
+        this.yet = false;
+        this.rectArea = new NiftRect;
+        this.imgHref = '';
+        this.create();
+    }
+
+    propertyWorker = (prop = new NiftProperty) => {
+
+        let newName = prop.name;
+        let newValue = prop.value;
+
+        // console.log("iterated from: "+prop.value + ", to: "+this.iteratePropertyValue(prop.value));
+
+        switch (prop.name) {
+            case 'x':
+                this.rectArea.x = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'y':
+                this.rectArea.y = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'width':
+                this.rectArea.w = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'height':
+                this.rectArea.h = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'content':
+                newName = 'content';
+                this.textContent = prop.value;
+                break;
+            default:
+                break;
+        }
+
+        if(newName == 'points')
+        {
+            this.rectArea.buildPolygonPoints();
+            newValue = this.rectArea.getPointsString();
+        }
+        // else if(newName == 'content')
+        // {
+        //     newValue = this.textContent;
+        // }
+
+        let index = -1;
+        let i = 0;
+        this.renderedProps.map(pr => {
+            if(pr.name == newName)
+            {
+                pr.value = newValue;
+                pr.toRemove = prop.toRemove;
+                index = i;
+            }
+            i++;
+        });
+
+        if(index == -1)
+        {
+            this.renderedProps.push(new NiftProperty(newName, newValue, prop.toRemove));
+            return this.renderedProps[this.renderedProps.length-1];
+        }
+        else
+        {
+            return this.renderedProps[index];
+        }
+
+    }
+
+    update = () => {
+
+        // Update backfall
+        // console.log(this.selfOutput.textLength.baseVal.value)
+
+        let i = 0;
+        this.props.map(prop => {
+            let newProp = this.propertyWorker(prop);
+            if(newProp)
+            {
+                if(!newProp.toRemove)
+                    this.selfOutput.setAttribute(newProp.name, newProp.value);
+                else
+                {
+                    this.selfOutput.removeAttribute(newProp.name);
+                    this.props.splice(i, 1);
+                }
+                i++;
+            }
+        });
+
+    }
+
+    create = () => {
+        this.selfOutput = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    }
+
+    render = () => {
+        if(this.yet)
+        {
+            this.update();
+        }
+        else
+        {
+            this.create();
+            this.update();
+            this.yet = true;
+        }
+    }
+}
+
 class NiftBlock extends NiftComponent
 {
 
