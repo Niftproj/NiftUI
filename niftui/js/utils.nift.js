@@ -11,7 +11,8 @@ const getCurrentRoute = () => {
 }
 
 const Component = {
-  "NIFTBLOCK": "NiftBlock"
+  "NIFTBLOCK": "NiftBlock",
+  "NIFTTEXT": "NiftText"
 }
 
 function GetDictionaryName(raw) {

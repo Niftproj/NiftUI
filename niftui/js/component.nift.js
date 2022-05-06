@@ -59,6 +59,7 @@ class NiftComponent extends NiftNode {
 
                 this.childs.push(new (eval(childComponentName))(childProps)); 
                 this.childs[this.childs.length-1].ready = true;
+                // this.childs[this.childs.length-1].innerText = child.innerText;
             }
         }
 
@@ -234,6 +235,138 @@ class NiftRect
         }, '');
 
         return this.pointsString;
+    }
+}
+
+class NiftText extends NiftComponent
+{
+    constructor(props = [])
+    {
+        super(props);
+        this.yet = false;
+        this.rectArea = new NiftRect;
+        this.textContent = '';
+        this.create();
+    }
+
+    propertyWorker = (prop = new NiftProperty) => {
+
+        let newName = prop.name;
+        let newValue = prop.value;
+
+        switch (prop.name) {
+            case 'x':
+                this.rectArea.x = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'y':
+                this.rectArea.y = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'width':
+                this.rectArea.w = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'height':
+                this.rectArea.h = parseInt(prop.value);
+                newName = 'points';
+                break;
+            case 'content':
+                newName = 'content';
+                this.textContent = prop.value;
+                break;
+            default:
+                break;
+        }
+
+        if(newName == 'points')
+        {
+            this.rectArea.buildPolygonPoints();
+            newValue = this.rectArea.getPointsString();
+        }
+        else if(newName == 'content')
+        {
+            newValue = this.textContent;
+        }
+
+        let index = -1;
+        let i = 0;
+        this.renderedProps.map(pr => {
+            if(pr.name == newName)
+            {
+                pr.value = newValue;
+                pr.toRemove = prop.toRemove;
+                index = i;
+            }
+            i++;
+        });
+
+        if(newName == 'points')
+        {
+            if(prop.name == 'x' || prop.name == 'y')
+            {
+                if(index == -1)
+                {
+                    this.renderedProps.push(new NiftProperty(prop.name, parseInt(prop.value), prop.toRemove));
+                    return this.renderedProps[this.renderedProps.length-1];
+                }
+                else
+                {
+                    return this.renderedProps[index];
+                }
+            }
+            return false;
+        }
+        else
+        {
+            if(index == -1)
+            {
+                this.renderedProps.push(new NiftProperty(newName, newValue, prop.toRemove));
+                return this.renderedProps[this.renderedProps.length-1];
+            }
+            else
+            {
+                return this.renderedProps[index];
+            }
+        }
+
+    }
+
+    update = () => {
+        let i = 0;
+        this.props.map(prop => {
+            let newProp = this.propertyWorker(prop);
+            if(newProp)
+            {
+                if(!newProp.toRemove)
+                    this.selfOutput.setAttribute(newProp.name, newProp.value);
+                else
+                {
+                    this.selfOutput.removeAttribute(newProp.name);
+                    this.props.splice(i, 1);
+                }
+                i++;
+            }
+        });
+
+        this.selfOutput.textContent = this.textContent;
+    }
+
+    create = () => {
+        this.selfOutput = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    }
+
+    render = () => {
+        if(this.yet)
+        {
+            this.update();
+        }
+        else
+        {
+            this.create();
+            this.update();
+            this.yet = true;
+        }
     }
 }
 

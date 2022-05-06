@@ -19,7 +19,10 @@ class LandingPage extends NiftComponent
     AfterRendering = () => {
         // this.setProperty("hello", "yes!");
         // this.setProperty("after", "it is after render a time!");
-        this.setProperty("fill", "royalblue");
+        setTimeout(() => {
+            this.setProperty("fill", "royalblue");
+            this.childs[11].setProperty("content", "IAMCHANGEDAFTER4SECONDSOK.");
+        }, 4000);
         // this.removeProperty("hello");
         // this.removeProperty("after");
         // console.log(this.getProperty("fill"));
@@ -70,6 +73,7 @@ class LandingPage extends NiftComponent
                 <NiftBlock x="0" y="480" width="${window.outerWidth}" height="540" fill="rgba(0,0,0,0.6)"></NiftBlock>
                 <NiftBlock x="0" y="540" width="${window.outerWidth}" height="600" fill="rgba(0,0,0,0.8)"></NiftBlock>
                 <NiftBlock x="0" y="600" width="${window.outerWidth}" height="660" fill="rgba(0,0,0,1)"></NiftBlock>
+                <NiftText x="100" y="100" style="font-size: 20;" content="Hello from NiftText.">Hello from NiftText.</NiftText>
             </NiftBlock>
         `);
     }
