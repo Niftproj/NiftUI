@@ -22,6 +22,10 @@ class LandingPage extends NiftComponent
         setTimeout(() => {
             this.setProperty("fill", "royalblue");
             this.childs[11].setProperty("content", "IAMCHANGEDAFTER4SECONDSOK.");
+            this.childs[11].setProperty("fill", "white");
+            this.childs[11].setProperty("y", "200");
+            console.log(this.childs[11].getProperty("style"));
+            this.childs[11].setProperty("style", this.childs[11].getProperty("style")+" text-shadow: 0 3px 16px rgba(0,0,0,1);");
         }, 4000);
         // this.removeProperty("hello");
         // this.removeProperty("after");
@@ -73,7 +77,7 @@ class LandingPage extends NiftComponent
                 <NiftBlock x="0" y="480" width="${window.outerWidth}" height="540" fill="rgba(0,0,0,0.6)"></NiftBlock>
                 <NiftBlock x="0" y="540" width="${window.outerWidth}" height="600" fill="rgba(0,0,0,0.8)"></NiftBlock>
                 <NiftBlock x="0" y="600" width="${window.outerWidth}" height="660" fill="rgba(0,0,0,1)"></NiftBlock>
-                <NiftText x="100" y="100" style="font-size: 20;" content="Hello from NiftText.">Hello from NiftText.</NiftText>
+                <NiftText x="100" y="100" style="font-size: 20px;" content="Hello from NiftText.">Hello from NiftText.</NiftText>
             </NiftBlock>
         `);
     }

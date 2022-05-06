@@ -72,10 +72,20 @@ class NiftComponent extends NiftNode {
 
     getProperty = (name) => {
         let res = undefined;
-        this.self.renderedProps.map(prop => {
-            if(prop.name == name && prop.toRemove == false)     // toRemove(deleted) Barrier
-                res = prop.value;
-        });
+        if(this.ready)
+        {
+            this.renderedProps.map(prop => {
+                if(prop.name == name && prop.toRemove == false)     // toRemove(deleted) Barrier
+                    res = prop.value;
+            });
+        }
+        else
+        {
+            this.self.renderedProps.map(prop => {
+                if(prop.name == name && prop.toRemove == false)     // toRemove(deleted) Barrier
+                    res = prop.value;
+            });
+        }
         return res;
     }
 
@@ -333,6 +343,10 @@ class NiftText extends NiftComponent
     }
 
     update = () => {
+
+        // Update backfall
+        // console.log(this.selfOutput.textLength.baseVal.value)
+
         let i = 0;
         this.props.map(prop => {
             let newProp = this.propertyWorker(prop);
