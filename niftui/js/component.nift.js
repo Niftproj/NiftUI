@@ -445,10 +445,6 @@ class NiftImage extends NiftComponent
             this.rectArea.buildPolygonPoints();
             newValue = this.rectArea.getPointsString();
         }
-        // else if(newName == 'content')
-        // {
-        //     newValue = this.textContent;
-        // }
 
         let index = -1;
         let i = 0;
@@ -462,14 +458,33 @@ class NiftImage extends NiftComponent
             i++;
         });
 
-        if(index == -1)
+        if(newName == 'points')
         {
-            this.renderedProps.push(new NiftProperty(newName, newValue, prop.toRemove));
-            return this.renderedProps[this.renderedProps.length-1];
+            if(prop.name == 'x' || prop.name == 'y' || prop.name == 'width' || prop.name == 'height')
+            {
+                if(index == -1)
+                {
+                    this.renderedProps.push(new NiftProperty(prop.name, parseInt(prop.value), prop.toRemove));
+                    return this.renderedProps[this.renderedProps.length-1];
+                }
+                else
+                {
+                    return this.renderedProps[index];
+                }
+            }
+            return false;
         }
         else
         {
-            return this.renderedProps[index];
+            if(index == -1)
+            {
+                this.renderedProps.push(new NiftProperty(newName, newValue, prop.toRemove));
+                return this.renderedProps[this.renderedProps.length-1];
+            }
+            else
+            {
+                return this.renderedProps[index];
+            }
         }
 
     }
