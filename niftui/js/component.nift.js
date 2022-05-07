@@ -204,25 +204,25 @@ class NiftRect
     {
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
+        this.w = w+x;
+        this.h = h+y;
         this.pointsString = '';
         this.points = [
             {
-                x: x,
-                y: y
+                x: this.x,
+                y: this.y
             },
             {
-                x: w,
-                y: y
+                x: this.w,
+                y: this.y
             },
             {
-                x: w,
-                y: h
+                x: this.w,
+                y: this.h
             },
             {
-                x: x,
-                y: h
+                x: this.x,
+                y: this.h
             }
         ];
     }
@@ -276,14 +276,18 @@ class NiftText extends NiftComponent
         let newValue = prop.value;
 
         // console.log("iterated from: "+prop.value + ", to: "+this.iteratePropertyValue(prop.value));
+        // let xd = -1;
+        // let yd = -1;
 
         switch (prop.name) {
             case 'x':
                 this.rectArea.x = parseInt(prop.value);
+                // xd = this.rectArea.x;
                 newName = 'points';
                 break;
             case 'y':
                 this.rectArea.y = parseInt(prop.value);
+                // yd = this.rectArea.y;
                 newName = 'points';
                 break;
             case 'width':
@@ -306,6 +310,10 @@ class NiftText extends NiftComponent
         {
             this.rectArea.buildPolygonPoints();
             newValue = this.rectArea.getPointsString();
+            // if(xd > -1)
+            //     this.rectArea.w += xd;
+            // if(yd > -1)
+            //     this.rectArea.y += yd;
         }
         else if(newName == 'content')
         {
@@ -403,7 +411,7 @@ class NiftImage extends NiftComponent
     {
         super(props);
         this.yet = false;
-        this.rectArea = new NiftRect;
+        this.rectArea = new NiftRect();
         this.imgHref = '';
         this.create();
     }
@@ -537,7 +545,7 @@ class NiftBlock extends NiftComponent
     {
         super(props);
         this.yet = false;
-        this.rectArea = new NiftRect;
+        this.rectArea = new NiftRect();
         this.create();
     }
 
@@ -547,14 +555,19 @@ class NiftBlock extends NiftComponent
         let newValue = prop.value;
 
         // console.log("iterated from: "+prop.value + ", to: "+this.iteratePropertyValue(prop.value));
+        // let xd = -1;
+        // let yd = -1;
+        // FIX H and y W & x
 
         switch (prop.name) {
             case 'x':
                 this.rectArea.x = parseInt(prop.value);
+                // xd = this.rectArea.x;
                 newName = 'points';
                 break;
             case 'y':
                 this.rectArea.y = parseInt(prop.value);
+                // yd = this.rectArea.y;
                 newName = 'points';
                 break;
             case 'width':
@@ -571,6 +584,10 @@ class NiftBlock extends NiftComponent
 
         if(newName == 'points')
         {
+            // if(xd > -1)
+            //     this.rectArea.w += xd;
+            // if(yd > -1)
+            //     this.rectArea.h += yd;
             this.rectArea.buildPolygonPoints();
             newValue = this.rectArea.getPointsString();
         }

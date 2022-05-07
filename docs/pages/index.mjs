@@ -5,6 +5,7 @@ import {NiftAsModule,
     NiftComponent,
     NiftInstance} from '../../build/js/niftui.all.min.js'
 
+// Currently it have a error with W & H
 
 class FtLandingPage extends NiftComponent
 {
@@ -33,6 +34,9 @@ class FtLandingPage extends NiftComponent
         
         <NiftBlock x="0" y="0" width="${window.outerWidth}" height="${window.outerHeight}" fill="#000">
         
+            <!--<NiftBlock x="10" y="10" width="300" height="60" fill="red"></NiftBlock>-->
+
+            
             <NiftImage x="${(window.outerWidth/2)-120/2}" y="60" width="120" href="https://niftproj.github.io/NiftUI/docs/assets/brand.svg"></NiftImage>
             <NiftText x="${(window.outerWidth/2)-95/2}" y="${150+70}" content="Nift*UI" fill="#fff" style="font-size: 30px; font-family: sans-serif;"></NiftText>
             <NiftText x="${(window.outerWidth/2)-250}" y="${150+70+30+20}" content="Fully Featured Frontend framework based on Vector Graphics." fill="rgba(255,255,255,0.7)" style="font-size: 18px; font-family: sans-serif;"></NiftText>
